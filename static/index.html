@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f5f6f2" />
+    <meta
+      name="description"
+      content="A calm, temporary room to talk and share files."
+    />
+    <title>AJoeChat | A lighter place to talk</title>
+    <link rel="stylesheet" href="/assets/styles.css" />
+    <script src="/assets/app.js" defer></script>
+  </head>
+  <body>
+    <div class="appFrame" id="appFrame">
+      <button
+        class="sideScrim"
+        id="sideScrim"
+        type="button"
+        aria-label="Close people panel"
+        tabindex="-1"
+      ></button>
+
+      <aside
+        class="sidePanel"
+        id="sidePanel"
+        aria-label="Room and people"
+        aria-hidden="false"
+      >
+        <a class="brand" href="/" aria-label="AJoeChat home">
+          <span class="brandMark" aria-hidden="true"
+            ><span>A</span><i></i
+          ></span>
+          <span class="brandName">AJoeChat</span>
+        </a>
+        <button
+          class="panelClose"
+          id="panelClose"
+          type="button"
+          aria-label="Close people panel"
+        >
+          ×
+        </button>
+
+        <div class="sideSectionLabel">YOUR SPACE</div>
+        <button
+          class="roomCard"
+          id="sharedRoomButton"
+          type="button"
+          aria-label="Return to shared room"
+        >
+          <span class="roomIcon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M7 4.5h10a3 3 0 0 1 3 3v5a3 3 0 0 1-3 3h-5l-5 3.5v-3.5a3 3 0 0 1-3-3v-5a3 3 0 0 1 3-3Z"
+              />
+            </svg>
+          </span>
+          <span class="roomCopy"
+            ><strong>Shared room</strong
+            ><small>One room for everyone</small></span
+          >
+        </button>
+
+        <div class="peopleHeading">
+          <span class="sideSectionLabel">PEOPLE HERE</span>
+          <span class="memberCount" id="memberCount">0</span>
+        </div>
+        <div
+          class="memberList"
+          id="memberList"
+          aria-live="polite"
+          aria-relevant="additions removals"
+        >
+          <p class="memberEmpty" id="memberEmpty">
+            Choose a person to start a private chat.
+          </p>
+        </div>
+
+        <div class="sideSpacer"></div>
+
+        <div class="privacyCard">
+          <span class="privacyIcon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M12 3.5 19 6v5.35c0 4.43-2.84 7.45-7 9.15-4.16-1.7-7-4.72-7-9.15V6l7-2.5Z"
+              />
+              <path d="m9 12 2 2 4-4" />
+            </svg>
+          </span>
+          <div>
+            <strong>Here for a while</strong>
+            <p>
+              Messages and files expire within 24 hours. A quiet room or server
+              restart can clear them sooner.
+            </p>
+          </div>
+        </div>
+        <div class="sideFooter">
+          <span class="onlineDot"></span><span>Made for the moment</span>
+        </div>
+      </aside>
+
+      <main class="mainPanel" id="mainPanel" aria-hidden="false">
+        <header class="topBar">
+          <div class="topLeft">
+            <button
+              class="iconButton peopleButton"
+              id="peopleButton"
+              type="button"
+              aria-label="Show people"
+              aria-expanded="false"
+              aria-controls="sidePanel"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  d="M16 20v-1.25A3.75 3.75 0 0 0 12.25 15h-5.5A3.75 3.75 0 0 0 3 18.75V20M9.5 11a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7ZM16 4.3a3.5 3.5 0 0 1 0 6.8M17 15.2a3.75 3.75 0 0 1 4 3.55V20"
+                />
+              </svg>
+            </button>
+            <div class="topRoom">
+              <span id="activeConversationLabel">Shared room</span>
+              <span class="topRoomDivider"></span>
+              <span class="topRoomMeta" id="topMemberCount">Just you</span>
+              <button
+                class="returnToRoom"
+                id="returnToRoom"
+                type="button"
+                hidden
+                aria-label="Return to shared room"
+              >
+                <span aria-hidden="true">←</span
+                ><span class="returnLabel">Shared room</span>
+              </button>
+            </div>
+          </div>
+          <div class="topActions">
+            <span
+              class="connectionPill"
+              id="connectionPill"
+              role="status"
+              aria-live="polite"
+              ><i></i><span id="connectionText">Ready when you are</span></span
+            >
+            <button class="leaveButton" id="leaveButton" type="button" hidden>
+              Leave room
+            </button>
+          </div>
+        </header>
+
+        <div class="pageBody">
+          <section class="joinView" id="joinView" aria-labelledby="joinTitle">
+            <div class="joinGlow joinGlowOne" aria-hidden="true"></div>
+            <div class="joinGlow joinGlowTwo" aria-hidden="true"></div>
+            <div class="joinCard">
+              <div class="welcomeMark" aria-hidden="true">
+                <span class="welcomeBubble bubbleOne"></span>
+                <span class="welcomeBubble bubbleTwo"></span>
+                <span class="welcomeBubble bubbleThree"></span>
+                <span class="welcomeStar">✦</span>
+              </div>
+              <div class="eyebrow">
+                <span class="eyebrowLine"></span> A SHARED SPACE, FOR A LITTLE
+                WHILE
+              </div>
+              <h1 id="joinTitle">A lighter place<br /><em>to talk.</em></h1>
+              <p class="joinDescription">
+                Drop in, say hello, and share a moment. No account needed.
+                Messages and files can disappear sooner when the room goes quiet
+                or the server restarts.
+              </p>
+
+              <form class="joinForm" id="joinForm" novalidate>
+                <label for="usernameInput">Your username</label>
+                <div class="usernameField" id="usernameField">
+                  <span class="atSign" aria-hidden="true">@</span>
+                  <input
+                    id="usernameInput"
+                    name="username"
+                    type="text"
+                    maxlength="48"
+                    autocomplete="username"
+                    autocapitalize="none"
+                    spellcheck="false"
+                    placeholder="Choose a name"
+                    aria-describedby="usernameHint joinError"
+                    required
+                  />
+                  <span
+                    class="inputCheck"
+                    id="inputCheck"
+                    aria-hidden="true"
+                  ></span>
+                </div>
+                <div class="fieldMeta">
+                  <span id="usernameHint">Letters, numbers, or underscore</span>
+                  <span id="usernameCount">0 of 24</span>
+                </div>
+                <p class="formError" id="joinError" role="alert" hidden></p>
+                <button class="joinButton" id="joinButton" type="submit">
+                  <span>Join the room</span>
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M5 12h14M13 6l6 6-6 6" />
+                  </svg>
+                </button>
+              </form>
+              <div class="joinFootnote">
+                <span class="sparkle">✦</span> A username is all you need
+              </div>
+            </div>
+            <div class="joinBottom">
+              <span>AJoeChat</span><span class="bottomDot"></span
+              ><span>Here for the moment</span>
+            </div>
+          </section>
+
+          <section
+            class="chatView"
+            id="chatView"
+            aria-label="Shared room conversation"
+            hidden
+          >
+            <div class="conversationIntro" id="conversationIntro">
+              <div class="roomOrb" aria-hidden="true"><span></span><i></i></div>
+              <div class="introEyebrow">
+                <span></span
+                ><span id="conversationEyebrow">THE SHARED ROOM</span>
+              </div>
+              <h1>
+                <span id="introTitleFirst">Good things</span><br /><em
+                  id="introTitleSecond"
+                  >start here.</em
+                >
+              </h1>
+              <p id="introDescription">
+                A little room for conversation, photos, and whatever is on your
+                mind.
+              </p>
+              <div class="introRule"><span></span><b>✦</b><span></span></div>
+            </div>
+
+            <div
+              class="messageList"
+              id="messageList"
+              role="log"
+              aria-live="polite"
+              aria-relevant="additions text"
+              aria-label="Messages"
+            >
+              <div class="emptyChat" id="emptyChat">
+                <span class="emptyChatIcon" aria-hidden="true">✳</span>
+                <strong id="emptyChatTitle">The room is yours</strong>
+                <span id="emptyChatDescription"
+                  >Start with a hello, or share a photo.</span
+                >
+              </div>
+            </div>
+
+            <div class="composerArea">
+              <div class="attachmentPreview" id="attachmentPreview" hidden>
+                <img id="attachmentImage" alt="Image ready to send" hidden />
+                <span
+                  class="attachmentFileType"
+                  id="attachmentFileType"
+                  aria-hidden="true"
+                  hidden
+                  >FILE</span
+                >
+                <div class="attachmentInfo">
+                  <strong id="attachmentName"></strong
+                  ><span id="attachmentSize"></span>
+                </div>
+                <button
+                  class="removeAttachment"
+                  id="removeAttachment"
+                  type="button"
+                  aria-label="Remove attached file"
+                >
+                  ×
+                </button>
+              </div>
+              <div class="composerCard" id="composerCard">
+                <textarea
+                  id="messageInput"
+                  rows="1"
+                  maxlength="6000"
+                  placeholder="Write a message..."
+                  aria-label="Write a message"
+                ></textarea>
+                <div class="composerTools">
+                  <div class="composerLeft">
+                    <button
+                      class="attachButton"
+                      id="attachButton"
+                      type="button"
+                      aria-label="Attach an image or file"
+                      title="Attach a file"
+                    >
+                      <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path
+                          d="M8.5 12.5 14 7a3.54 3.54 0 0 1 5 5l-7.5 7.5a5.66 5.66 0 0 1-8-8L11 4"
+                        />
+                        <path d="m8 14 6.5-6.5" />
+                      </svg>
+                    </button>
+                    <span class="attachmentHint"
+                      >Images and files up to 5 MB</span
+                    >
+                    <input
+                      id="fileInput"
+                      type="file"
+                      accept="image/jpeg,image/png,image/webp,video/mp4,audio/mpeg,text/plain,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.jpg,.jpeg,.png,.webp,.mp4,.mp3,.txt,.pdf,.docx"
+                      hidden
+                    />
+                  </div>
+                  <button
+                    class="sendButton"
+                    id="sendButton"
+                    type="button"
+                    aria-label="Send message"
+                    disabled
+                  >
+                    <span>Send</span>
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M4 12 20 4l-5.5 16-3.1-6.4L4 12Z" />
+                      <path d="m11.4 13.6 4.1-4.1" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div class="composerCaption">
+                <span id="charCount">0 of 3000</span
+                ><span>Enter sends · Shift and Enter adds a new line</span>
+              </div>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+
+    <div
+      class="toastRegion"
+      id="toastRegion"
+      role="region"
+      aria-label="Notifications"
+      aria-live="polite"
+      aria-atomic="true"
+    ></div>
+
+    <dialog class="imageDialog" id="imageDialog" aria-label="Image preview">
+      <button
+        class="dialogClose"
+        id="dialogClose"
+        type="button"
+        aria-label="Close image"
+      >
+        ×
+      </button>
+      <img id="dialogImage" alt="Shared image" />
+    </dialog>
+  </body>
+</html>
